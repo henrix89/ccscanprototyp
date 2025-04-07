@@ -96,8 +96,6 @@ export default function JobbVareUttak() {
             if (kode && kode !== lastScannedRef.current) {
               lastScannedRef.current = kode;
               leggTilVare(kode);
-
-              // ✅ Nullstill for å kunne scanne nye varer raskt
               setTimeout(() => {
                 lastScannedRef.current = "";
               }, 1000);
@@ -187,9 +185,7 @@ export default function JobbVareUttak() {
       totalInkMva: prisEksMva * nyAntall * MVA_SATS,
     };
 
-    const nyListe = varer.map((v) =>
-      v.kode === kode ? oppdatert : v
-    );
+    const nyListe = varer.map((v) => (v.kode === kode ? oppdatert : v));
     oppdaterHandlekurv(nyListe);
   };
 
@@ -211,11 +207,15 @@ export default function JobbVareUttak() {
 
     autoTable(doc, {
       startY: 40,
-      head: [["Varenummer", "Beskrivelse", "Antall", "Eks. MVA", "Ink. MVA"]],
+      head: [["Varenummer", "Beskrivelse", "Antall", "Tidspunkt", "Eks. MVA", "Ink. MVA"]],
       body: varer.map((v) => [
         varedata[v.kode]?.varenummer || v.kode,
         v.beskrivelse,
         v.antall,
+        new Date(v.tidspunkt).toLocaleString("no-NO", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }),
         `${v.totalEksMva.toFixed(2)} kr`,
         `${v.totalInkMva.toFixed(2)} kr`,
       ]),
@@ -279,6 +279,7 @@ export default function JobbVareUttak() {
                     <th>Varenummer</th>
                     <th>Beskrivelse</th>
                     <th>Antall</th>
+                    <th>Tidspunkt</th>
                     <th>Sum eks mva</th>
                     <th>Sum inkl mva</th>
                     <th></th>
@@ -287,18 +288,24 @@ export default function JobbVareUttak() {
                 <tbody>
                   {varer.map((v) => (
                     <tr key={v.kode} style={{ borderBottom: "1px solid var(--border)" }}>
-                      <td data-label="Varenummer">{varedata[v.kode]?.varenummer || v.kode}</td>
-                      <td data-label="Beskrivelse">{getVarenavn(v.kode)}</td>
-                      <td data-label="Antall">
+                      <td>{varedata[v.kode]?.varenummer || v.kode}</td>
+                      <td>{getVarenavn(v.kode)}</td>
+                      <td>
                         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
                           <button onClick={() => endreAntall(v.kode, -1)} disabled={v.antall <= 1}>−</button>
                           <span>{v.antall}</span>
                           <button onClick={() => endreAntall(v.kode, 1)}>+</button>
                         </div>
                       </td>
-                      <td data-label="Sum eks mva">{v.totalEksMva.toFixed(2)}</td>
-                      <td data-label="Sum inkl mva">{v.totalInkMva.toFixed(2)}</td>
-                      <td data-label="Fjern">
+                      <td>
+                        {new Date(v.tidspunkt).toLocaleString("no-NO", {
+                          dateStyle: "short",
+                          timeStyle: "short"
+                        })}
+                      </td>
+                      <td>{v.totalEksMva.toFixed(2)} kr</td>
+                      <td>{v.totalInkMva.toFixed(2)} kr</td>
+                      <td>
                         <button onClick={() => fjernVare(v.kode)}>🗑️</button>
                       </td>
                     </tr>
@@ -306,9 +313,9 @@ export default function JobbVareUttak() {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan={3}><strong>Totalt</strong></td>
-                    <td>{varer.reduce((sum, v) => sum + v.totalEksMva, 0).toFixed(2)}</td>
-                    <td>{varer.reduce((sum, v) => sum + v.totalInkMva, 0).toFixed(2)}</td>
+                    <td colSpan={4}><strong>Totalt</strong></td>
+                    <td>{varer.reduce((sum, v) => sum + v.totalEksMva, 0).toFixed(2)} kr</td>
+                    <td>{varer.reduce((sum, v) => sum + v.totalInkMva, 0).toFixed(2)} kr</td>
                     <td></td>
                   </tr>
                 </tfoot>
