@@ -1,0 +1,386 @@
+/* ================================
+   🎨 Fargevariabler (lys/mørk)
+================================== */
+:root {
+  --bg: #f6f7f9;
+  --text: #222;
+  --card-bg: #fff;
+  --accent: #0077cc;
+  --input-bg: #fff;
+  --border: #ccc;
+  --button-bg: #0077cc;
+  --button-text: #fff;
+  --button-hover: #005fa3;
+  --header-bg: #fff;
+  --header-border: #eee;
+}
+
+body.dark {
+  --bg: #1f1f23;
+  --text: #eaeaea;
+  --card-bg: #2b2d31;
+  --accent: #4aa8ff;
+  --input-bg: #3a3b3f;
+  --border: #555;
+  --button-bg: #4aa8ff;
+  --button-text: #000;
+  --button-hover: #2894e0;
+  --header-bg: #202225;
+  --header-border: #333;
+}
+
+/* ================================
+   🌍 Grunnleggende layout
+================================== */
+* {
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 16px;
+}
+
+/* ================================
+   🧱 Kort/innhold
+================================== */
+.app-card,
+.admin-container,
+.theme-card {
+  background-color: var(--card-bg);
+  color: var(--text);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 1000px;
+}
+
+.theme-card {
+  padding: 24px;
+}
+
+/* ================================
+   🧭 Header
+================================== */
+.app-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--header-bg);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  border-bottom: 1px solid var(--header-border);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-user {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.app-header button {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.app-header button:hover {
+  background-color: var(--button-hover);
+}
+
+/* ================================
+   📦 Meny og seksjoner
+================================== */
+.menu {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.menu button {
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.menu button:hover {
+  background-color: var(--button-hover);
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+.section h2 {
+  margin-bottom: 15px;
+  color: var(--text);
+}
+
+/* ================================
+   🧾 Input-grupper
+================================== */
+.input-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.input-group input,
+.input-group select {
+  padding: 10px;
+  font-size: 14px;
+  background-color: var(--input-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.input-group button {
+  padding: 10px 16px;
+  font-size: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-group button:hover {
+  background-color: #1e7e34;
+}
+
+/* ================================
+   📋 Liste-elementer
+================================== */
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: var(--input-bg);
+}
+
+.list-item span {
+  flex: 1;
+}
+
+/* Slett-knapp */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 18px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #a71d2a;
+}
+
+/* ================================
+   📥 Login
+================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+form input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background-color: var(--input-bg);
+  color: var(--text);
+}
+
+form button {
+  padding: 10px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: var(--button-hover);
+}
+
+/* ================================
+   🖼️ Logo
+================================== */
+.logo-wrapper {
+  text-align: center;
+}
+
+.logo {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+/* ================================
+   ✅ Velkomst
+================================== */
+.welcome-message {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.logout-button {
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.logout-button:hover {
+  background-color: #d0d0d0;
+}
+
+/* ================================
+   📊 Excel-import
+================================== */
+.excel-import table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.excel-import th,
+.excel-import td {
+  padding: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.excel-import th {
+  background-color: var(--input-bg);
+}
+
+.app-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+@media (max-width: 768px) {
+  input,
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  video {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  table {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table,
+  tbody,
+  tr,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  table td {
+    border: none;
+    padding: 10px 0;
+    position: relative;
+  }
+
+  table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .theme-card {
+    padding: 16px;
+  }
+}
+
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 180px;
+  height: auto;
+}
