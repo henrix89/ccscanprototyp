@@ -96,9 +96,8 @@ export default function JobbVareUttak() {
             if (kode && kode !== lastScannedRef.current) {
               lastScannedRef.current = kode;
               leggTilVare(kode);
-              setTimeout(() => {
-                lastScannedRef.current = "";
-              }, 1000);
+              lastScannedRef.current = "";  // umiddelbar nullstilling
+              
             }
           }
           if (err && !(err instanceof NotFoundException)) {
